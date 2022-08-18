@@ -1,0 +1,33 @@
+replicaCount: 1
+volumeMountPath: "shared-volumes"
+nginxServiceName: "nginx-web-app"
+branch: "main"
+
+config:
+  POSTGRES_SERVER_AND_PORT: postgres-api.kotlin-app.svc.cluster.local
+  POSTGRES_DATABASE_NAME: kotlin-app
+  POSTGRES_USER: kotlin-app
+  POSTGRES_PASSWORD: kotlin-app
+
+image:
+  registry: christopherguzman
+  repository: kotlin-app
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  externalPort: 80
+  internalPort: 8080
+
+ingress:
+  enabled: false
+  host: myapp.com
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
