@@ -1,5 +1,5 @@
 replicaCount: 1
-volumeMountPath: "shared-volumes"
+volumeMountPath: 'shared-volumes'
 
 config:
   POSTGRES_DB: default
@@ -28,3 +28,7 @@ resources:
   requests:
     cpu: 100m
     memory: 128Mi
+
+deployment:
+  nodeSelector:
+    nodeName: master

@@ -1,10 +1,10 @@
-replicaCount: 1
-volumeMountPath: "shared-volumes"
-nginxServiceName: "nginx-web-app"
-branch: "main"
+replicaCount: 2
+volumeMountPath: 'shared-volumes'
+nginxServiceName: 'nginx-web-app'
+branch: 'main'
 
 config:
-  POSTGRES_SERVER_AND_PORT: postgres-api.kotlin-app.svc.cluster.local
+  POSTGRES_SERVER_AND_PORT: postgres-api.kotlin-app.svc.cluster.local:5432
   POSTGRES_DATABASE_NAME: kotlin-app
   POSTGRES_USER: kotlin-app
   POSTGRES_PASSWORD: kotlin-app
@@ -21,8 +21,8 @@ service:
   internalPort: 8080
 
 ingress:
-  enabled: false
-  host: myapp.com
+  enabled: true
+  host: kike.iguzman.com.mx
 
 resources:
   limits:
@@ -31,3 +31,7 @@ resources:
   requests:
     cpu: 100m
     memory: 128Mi
+
+deployment:
+  nodeSelector:
+    heavyWorkerNode: 'true'
